@@ -70,6 +70,19 @@ class text_similarity:
         top_nodes = sorted(degrees.items(), key=lambda x: x[1], reverse=True)[:top_n]
         return [(i, degrees[i], docs[i]) for i, _ in top_nodes]
     
+ 
+
+    def top_pairs(sim_matrix, docs, top_n=6):
+        n = sim_matrix.shape[0]
+        pairs = []
+        for i in range(n):
+            for j in range(i + 1, n):
+                pairs.append((sim_matrix[i, j], i, j))
+        pairs = sorted(pairs, key=lambda x: x[0], reverse=True)[:top_n]
+        return [(score, docs[i], docs[j]) for score, i, j in pairs]
+
+
+    
     def spring_layout_visualization(self,G,title):
         plt.figure(figsize=(10, 8))
         pos = nx.spring_layout(G, seed=42)  # Layout for better visualization
@@ -106,6 +119,19 @@ class text_similarity:
         # plot eigenvalues
         self.compute_eigenvalues(G_bert,G_tfidf,G_use)
         self.plot_eigenvalues()
+
+        # In main(), after building graphs and before visualization:
+        print("\nTop 6 news pairs with highest cosine similarity (BERT):")
+        for score, doc1, doc2 in top_pairs(self.sim_matrix_bert, docs):
+            print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
+
+        print("\nTop 6 news pairs with highest cosine similarity (TF-IDF):")
+        for score, doc1, doc2 in top_pairs(self.sim_matrix_tfidf, docs):
+            print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
+
+        print("\nTop 6 news pairs with highest cosine similarity (USE):")
+        for score, doc1, doc2 in top_pairs(self.sim_matrix_use, docs):
+            print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
 
 
         print("\nTop 10 news (BERT) with highest connections:")
