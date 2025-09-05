@@ -122,15 +122,15 @@ class text_similarity:
 
         # In main(), after building graphs and before visualization:
         print("\nTop 6 news pairs with highest cosine similarity (BERT):")
-        for score, doc1, doc2 in top_pairs(self.sim_matrix_bert, docs):
+        for score, doc1, doc2 in self.top_pairs(self.sim_matrix_bert, docs):
             print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
 
         print("\nTop 6 news pairs with highest cosine similarity (TF-IDF):")
-        for score, doc1, doc2 in top_pairs(self.sim_matrix_tfidf, docs):
+        for score, doc1, doc2 in self.top_pairs(self.sim_matrix_tfidf, docs):
             print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
 
         print("\nTop 6 news pairs with highest cosine similarity (USE):")
-        for score, doc1, doc2 in top_pairs(self.sim_matrix_use, docs):
+        for score, doc1, doc2 in self.top_pairs(self.sim_matrix_use, docs):
             print(f"Score: {score:.4f}\nDoc 1: {doc1}\nDoc 2: {doc2}\n")
 
 
@@ -154,7 +154,7 @@ class text_similarity:
 if __name__ == "__main__":
 
     # Load data
-    file_path = '/content/drive/MyDrive/Project_data/CNN_news_data/train.csv'
+    file_path = 'data/cnn_dailymail/test.csv'
     df = pd.read_csv(file_path)
     docs = df['article'].dropna().tolist()[:4000] # limiting to 4000 docs (ram issues)
 
