@@ -53,12 +53,11 @@ uv sync
 - Top 10 news articles with highest connections in each graph.
 - Top 6 most similar news pairs for each embedding.
 - Plots comparing eigenvalues of the graphs.
-- Visualizations of the similarity graphs.
-![Eigenvalues Plot](visualization/egien_value.png.png)
+- Visualizations of the similarity graphs networks and Eigenvalues.
 ![BERT GRAPH NETWORK](visualization/g_bert_visualization.png)
 ![TF-IDF GRAPH NETWORK](visualization/g_tfidf_visualization.png)
 ![USE GRAPH NETWORK](visualization/g_use_visualization.png)
-
+![Eigenvalues Plot](visualization/eigen_value.png)
 ## Customization
 
 - Change the number of articles loaded by modifying the slicing in the code.
